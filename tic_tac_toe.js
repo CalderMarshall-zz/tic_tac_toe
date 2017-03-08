@@ -1,10 +1,13 @@
 $(function() {
+     // inintial value for player, win boolean
      var player = 'O';
      var win = false;
-
+// main function for click events
      $('.box').click(function() {
+          // variable for current text of box
           var value = $(this).text();
           if (value === ''){
+               // alternating text based on click events
                $(this).text(player);
                if (player === 'O') {
                     player = "X";
@@ -12,9 +15,13 @@ $(function() {
                     player = 'O';
                }
           }
+          // mappping over box texts and sending their texts to an array
           var wtf = $('.box').map(function() { return $(this).text();
           });
           console.log(wtf);
+
+
+          // WIN TESTS
           var column1 = function() {
                if (wtf[0] === wtf[1] && wtf[0] === wtf[2] && wtf[1] !=='')  {
                     console.log("column one winner, " + wtf[1]);
@@ -61,6 +68,9 @@ $(function() {
                }
           };
           row3();
+
+          // WIN TESTS DIAGONAL
+
           var digLRDWN = function() {
                if (wtf[0] === wtf[4] && wtf[0] === wtf[8] && wtf[4] !==''){
                     console.log("diagonal down winner, " + wtf[0]);
@@ -68,6 +78,7 @@ $(function() {
                }
           };
           digLRDWN();
+
           var digRLUP = function() {
                if (wtf[6] === wtf[4] && wtf[6] === wtf[2] && wtf[4] !==''){
                     console.log("diagonal up winner , " + wtf[6]);
@@ -75,7 +86,9 @@ $(function() {
                }
           };
           digRLUP();
+          // timeout delaying alert until text in win box has changed
           if (win === true) {
+               // setting variable so winner wil display X or O
                var text = $(this).text();
                setTimeout(function(){
                     alert(text+ " Wins!");
@@ -83,3 +96,6 @@ $(function() {
           }
       });
 });
+// consolidate win tests in to one function!!!
+// end game after win
+// code for a draw
